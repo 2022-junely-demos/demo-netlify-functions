@@ -10,7 +10,7 @@ const headers = {
 // eslint-disable-next-line no-unused-vars
 exports.handler = async (event, context) => {
   try {
-    const response = await fetch('https://cat-fact.herokuapp.com/facts');
+    const response = await fetch('https://futuramaapi.herokuapp.com/api/quotes');
     const data = await response.json();
     const json = JSON.stringify(data);
 

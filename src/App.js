@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [quotes, setQuotes] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await fetch('/.netlify/functions/cat-endpoint');
+      const data = await resp.json();
+      setQuotes(data);
+    };
+    fetchData();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {quotes.map((quote, idx) => (
+        <div key={idx}>{quote.quote}</div>
+      ))}
     </div>
   );
 }
